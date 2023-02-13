@@ -173,3 +173,25 @@ def visualize_bounding_box_voc(image_path, bounding_box, label, color=(255, 0, 0
     # show the image
     plt.imshow(image)
     plt.show()
+
+# change labels from string to numeric classes
+# INPUT: labels - the labels to change
+#        verbose - whether or not to print information about the photo
+# OUTPUT: labels - the labels in numeric classes
+def change_labels_to_numeric(labels, verbose=False):
+    # get the unique labels
+    unique_labels = np.unique(labels)
+    numeric_labels = labels.copy()
+    # create a dictionary to map the labels to numeric classes
+    label_to_numeric = {}
+    for i in range(len(unique_labels)):
+        label_to_numeric[unique_labels[i]] = i
+
+    # change the labels to numeric classes
+    for i in range(len(labels)):
+        numeric_labels[i] = label_to_numeric[labels[i]]
+
+    if verbose:
+        print("Changed labels to numeric classes")
+
+    return numeric_labels
